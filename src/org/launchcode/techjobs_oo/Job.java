@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class Job {
+public class Job extends JobField{
 
     private int id;
     private static int nextId = 1;
@@ -18,11 +18,12 @@ public class Job {
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
-    public Job(){
+    public Job() {
         id = nextId;
         nextId++;
     }
-    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
+
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
         this.name = name;
         this.employer = employer;
@@ -102,4 +103,47 @@ public class Job {
     public int getId() {
         return id;
     }
+
+
+    @Override
+    public String toString() {
+
+        String jobInfo;
+
+
+
+        if(getName() == null || getName() == "") {
+            this.name = "Data not available";
+        }
+        if(getEmployer() == null || getEmployer().getValue() == ""){
+            this.employer = new Employer("Data not available");
+        }
+
+        if(getLocation() == null || getLocation().getValue() == ""){
+            this.location = new Location("Data not available");
+        }
+
+        if(getPositionType() == null || getPositionType().getValue() == ""){
+            this.positionType = new PositionType("Data not available");
+        }
+
+        if(getCoreCompetency() == null || getCoreCompetency().getValue() == ""){
+            this.coreCompetency = new CoreCompetency("Data not available");
+        }
+
+
+        jobInfo =   "\nID: " + getId() +
+                "\nName: " + getName() +
+                "\nEmployer: " + getEmployer() +
+                "\nLocation: " + getLocation() +
+                "\nPosition Type: " + getPositionType() +
+                "\nCore Competency: " + getCoreCompetency();
+
+
+         return jobInfo;
+    }
+
 }
+
+
+

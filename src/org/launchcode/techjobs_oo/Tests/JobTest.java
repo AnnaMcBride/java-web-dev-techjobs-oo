@@ -15,6 +15,8 @@ public class JobTest {
     Job testJob3;
     Job testJob4;
     Job testJob5;
+    Job testJob6;
+
 
    @Before
    public void jobObject(){
@@ -24,8 +26,8 @@ public class JobTest {
                   new PositionType("Quality Control"), new CoreCompetency("Persistence"));
        testJob4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
                   new PositionType("Quality Control"), new CoreCompetency("Persistence"));
-       testJob5 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
-                  new PositionType("Quality Control"), new CoreCompetency("Persistence"));
+       testJob5 = new Job("", new Employer("ACME"), new Location("Desert"), new PositionType("QA"), new CoreCompetency("Persistence"));
+       testJob6 = new Job("Product tester", new Employer(""),new Location ("Desert"), new PositionType("QA"), new CoreCompetency("Persistence"));
    }
 
     @Test
@@ -41,6 +43,21 @@ public class JobTest {
 
     @Test
     public void testJobsForEquality(){
-       assertEquals(false, testJob4.equals(testJob5));
+       assertEquals(false, testJob3.equals(testJob4));
+    }
+
+    @Test
+    public void testToStringForNewLineAtBeginning(){
+       assertEquals(true, testJob3.toString().startsWith("\n"));
+    }
+
+    @Test
+    public void testToStringForDataNotAvailable(){
+       assertEquals(true, testJob5.toString().contains("Data not available"));
+    }
+
+    @Test
+    public void testToStringForMoreDataNotAvailable(){
+       assertEquals(true, testJob6.toString().contains("Data not available"));
     }
 }
